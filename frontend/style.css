@@ -1,0 +1,266 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Helvetica','Arial' sans-serif;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+
+input[type="password"]::-webkit-input-placeholder {
+  color: rgba(71, 87, 98, 0.8);
+}
+
+input[type="password"]::input-placeholder {
+  color: rgba(71, 87, 98, 0.8);
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: table;
+}
+
+
+#app-container {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+#app h2 {
+  font-size: 25px;
+  color: #475762;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: block;
+  margin: 0 auto;
+  width: 320px;
+  height: auto;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+#app input[type="password"] {
+  font-size: 23px;
+  width: 320px;
+  height: auto;
+  border: 1px solid #2196F3;
+  background: #EEEEEE;
+  color: #475762;
+
+  border-radius: 4px;
+  padding: 0px 10px;
+  overflow: hidden;
+  outline: none;
+  -webkit-transition: all .1s;
+  transition: all .1s;
+}
+
+#app input[type="password"]:focus {
+  border: 1px solid #2196F3;
+}
+
+.p_length {
+  padding: 2px 10px;
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  background: #ff753f;
+  color: #FFF;
+  border-radius: 4px;
+  font-size: 13px;
+  display: none;
+  -webkit-transition: all .1s;
+  transition: all .1s;
+}
+
+.p_length_valid {
+  background: #00e470;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.p_length_show {
+  display: block;
+}
+
+.msg-container {
+  display: block;
+  margin: 10px auto;
+  width: 320px;
+  height: auto;
+}
+
+.msg-container p {
+  width: 100%;
+  height: auto;
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: left;
+  border-radius: 2px;
+  color: rgba(71, 87, 98, 0.8);
+  background: -webkit-linear-gradient(left, #00e470  50%, #F8F8F8 50%);
+  background: linear-gradient(to right, #00e470  50%, #F8F8F8 50%);
+  background-size: 201% 100%;
+  background-position: right;
+  -webkit-transition: background .3s;
+  transition: background .3s;
+  padding: 1em 1em;
+}
+
+.rating{
+  font-size:14px !important;
+  margin-bottom:10px;
+  display:none;
+}
+
+.rating_show{
+  display:block;
+}
+
+.weak{
+   color: #ff0000 !important;
+}
+
+.not_bad{
+   color: #ff8b5e !important;
+}
+
+.good{
+   color: #ffc745 !important;
+}
+
+.strong{
+   color: #00e470 !important;
+}
+
+.suggestions{
+  width: 100%;
+  height: auto;
+  font-size: 12px;
+  line-height: 1.2;
+  text-align: left;
+  border-radius: 8px;
+  color: rgba(71, 87, 98, 0.8);
+  background: -webkit-linear-gradient(left, #00e470 50%, #d5d5d5 50%);
+  background: linear-gradient(to right, #00e470 50%, #d5d5d5 50%);
+  background-size: 201% 100%;
+  background-position: right;
+  -webkit-transition: background .3s;
+  transition: background .3s;
+  padding: 1em 1em;
+  margin-bottom:20px;
+  display:none;
+}
+
+.suggestions_show{
+  display:block;
+}
+
+.msg-saved{
+  width:400px;
+}
+.saved{
+  display:block;
+}
+
+
+.criteria_passed {
+  background-position: left !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.save-container {
+  display: block;
+  margin: 20px auto;
+  position: relative;
+  width: 320px;
+  height: auto;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.save-btn{
+  width:100%;
+}
+
+.show_save_container {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  width: 370px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+  transition: all .3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body {
+  margin: 20px 0;
+}
+
+.modal-default-button {
+  float: right;
+  padding:2px 5px;
+}
+
+
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}

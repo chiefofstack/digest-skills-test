@@ -1,0 +1,118 @@
+<html>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+  <title>DIGEST - Skills Test</title>
+  <link rel="stylesheet" href="style.css">
+
+
+</head>
+<body>
+  <div id="app">
+    <div id="app-container">
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-5 col-md-offset-1">
+
+                <div class="input-container">
+                  <input id="pass_input" type="password" @input="p_input" v-model="password" placeholder="enter your password here" maxlength="30" @keypress.32.prevent="showSpaceError = true;" autofocus />
+                  <span :class="{ p_length_valid: p_length_accepted , p_length_show: typed}" class="p_length">{{p_length}}</span>
+                </div>
+                <div class="msg-container">
+                  <span class="rating" :class="{rating_show: typed, strong: score == 3,  good: score == 2, not_bad: score == 1, weak: score == 0}">{{ rating }}</span>
+                  <div class="suggestions" :class="{suggestions_show: typed && score < 3}">SUGGESTIONS:
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item" v-for="item in suggestions">{{ item }}</li>
+                    </ul>
+                  </div>
+
+                  <p :class="{ criteria_passed: p_length_accepted }">Must be at least 8 characters long</p>
+                  <p :class="{ criteria_passed: has_lowercase }">Must have lowercase letters</p>
+                  <p :class="{ criteria_passed: has_uppercase }">Must have uppercase letters</p>
+                  <p :class="{ criteria_passed: has_number || has_symbol }">Must include at least one number or symbol</p>
+                </div>
+                <div class="save-container" :class="{show_save_container : score > 0 }">
+                  <div class="save-btn">
+                    <button class="btn btn-dark" @click.prevent="postPassword" > Save Password </button>
+                  </div>
+                </div>
+
+
+            </div>
+            <div class="col-md-5">
+              <div class="msg-container msg-saved">
+                <div class="suggestions saved" >SAVED PASSWORDS(Last saved items displayed below):
+                  <ul class="list-group list-group-flush" v-model="passwords">
+                      <li class="list-group-item" v-for="(item,index) in passwords" v-if="index < 10">{{ item.password }}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-1">
+            </div>
+
+         </div>
+       </div>
+
+
+    </div>
+
+    <modal v-if="showDuplicateDetected" @close="showDuplicateDetected = false">
+      <h3 slot="header">Duplicate Detected!</h3>
+      <p slot="body">Your chosen password has been saved already, please think of a new one. Thanks!</p>
+    </modal>
+
+    <modal v-if="showPasswordSaved" @close="showPasswordSaved = false">
+      <h3 slot="header">Password Saved!</h3>
+      <p slot="body">Thank you for saving your password</p>
+    </modal>
+
+
+    <modal v-if="showSpaceError" @close="showSpaceError = false">
+      <h3 slot="header">Input Error!</h3>
+      <p slot="body">Space is not allowed</p>
+    </modal>
+
+    <modal v-if="showMaxLengthReached" @close="showMaxLengthReached = false">
+      <h3 slot="header">Max Limit Reached!</h3>
+      <p slot="body">Max length of 30 characters reached.</p>
+    </modal>
+
+
+
+  </div>
+
+
+
+  <script type="text/x-template" id="modal-template">
+    <transition name="modal">
+      <div class="modal-mask">
+        <div class="modal-wrapper">
+          <div class="modal-container">
+
+            <div class="modal-header">
+              <slot name="header"> default header </slot>
+            </div>
+
+            <div class="modal-body">
+              <slot name="body"> default body </slot>
+            </div>
+
+            <div class="modal-footer">
+              <slot name="footer"> <button class="btn btn-dark" @click="$emit('close')"> < Go Back </button>  </slot>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </transition>
+  </script>
+
+
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+  <script src="password-analyzer.js"></script>
+
+</body>
+</html>
